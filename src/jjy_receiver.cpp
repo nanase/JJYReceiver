@@ -86,12 +86,8 @@ void JJYReceiver::update() {
         if ((this->seconds + 1) % 60 == 0)
           this->decider.countUp();
 
-        if (this->marker_detected) {
+        if (this->marker_detected)
           this->decider.setTimeCode(&this->decoder, this->seconds, code);
-          Serial.println(this->decider.dump(this->seconds + 1));
-          Serial.println("Q: " + String(this->decoder.getMarkerQuality()) + "/7");
-          Serial.println();
-        }
 
         if (this->onReceiveTimeCode != NULL)
           this->onReceiveTimeCode(code);

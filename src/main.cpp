@@ -9,6 +9,12 @@
 
 JJYReceiver receiver;
 
+void onReceiveTimeCode(uint8_t timecode) {
+  Serial.print(receiver.getJJYDecider()->dump(receiver.getSeconds()));
+  Serial.println(", Q: " + String(receiver.getJJYDecoder()->getMarkerQuality()) + "/7");
+  Serial.println();
+}
+
 void callback() {
   receiver.countUpSeconds();
   tone(PIN_SPEAKER, 800, 50);
@@ -22,6 +28,7 @@ void setup() {
   digitalWrite(PIN_SPEAKER, LOW);
 
   receiver.initialize(PIN_JJY_SIGNAL);
+  receiver.attachOnReceiveTimeCode(onReceiveTimeCode);
   Synchronizer.begin(PIN_JJY_SIGNAL, callback);
 }
 
