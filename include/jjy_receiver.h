@@ -29,6 +29,13 @@ class JJYReceiver {
   void countUpSeconds();
   void update();
 
+  JJYDecoder *getJJYDecoder();
+  JJYDecider *getJJYDecider();
+  uint8_t getSeconds();
+  bool markerDetected();
+
+  void attachOnReceiveTimeCode(void (*callback)(uint8_t timecode));
+
   static uint8_t judgeCode(uint8_t signal);
 
  private:
@@ -43,6 +50,8 @@ class JJYReceiver {
   volatile uint8_t seconds = 0;
   uint8_t marker_count     = 0;
   bool marker_detected     = false;
+
+  void (*onReceiveTimeCode)(uint8_t timecode) = NULL;
 
   void receive_signal();
 };

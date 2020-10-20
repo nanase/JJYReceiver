@@ -92,6 +92,9 @@ void JJYReceiver::update() {
           Serial.println("Q: " + String(this->decoder.getMarkerQuality()) + "/7");
           Serial.println();
         }
+
+        if (this->onReceiveTimeCode != NULL)
+          this->onReceiveTimeCode(code);
       }
       break;
     }
@@ -102,6 +105,28 @@ void JJYReceiver::update() {
       break;
   }
 }
+
+JJYDecoder *JJYReceiver::getJJYDecoder() {
+  return &this->decoder;
+}
+
+JJYDecider *JJYReceiver::getJJYDecider() {
+  return &this->decider;
+}
+
+uint8_t JJYReceiver::getSeconds() {
+  return (this->seconds + 1) % 60;
+}
+
+bool JJYReceiver::markerDetected() {
+  return this->marker_detected;
+}
+
+void JJYReceiver::attachOnReceiveTimeCode(void (*callback)(uint8_t timecode)) {
+  this->onReceiveTimeCode = callback;
+}
+
+// -----------------------
 
 const uint8_t JJY_JUDGE_MAP[16] = { JJY_M, JJY_U, JJY_U, JJY_U, JJY_H, JJY_U, JJY_U, JJY_L,
                                     JJY_H, JJY_L, JJY_H, JJY_L, JJY_H, JJY_L, JJY_H, JJY_L };
