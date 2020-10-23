@@ -34,6 +34,10 @@ String JJYDecider::dump(uint8_t seconds) {
   return text + " ==> " + this->decided.toString(seconds);
 }
 
+JJYDateTime *JJYDecider::getDecidedDateTime() {
+  return &this->decided;
+}
+
 void JJYDecider::decide() {
   int8_t minutes         = this->candidates[0].getMinutes();
   int8_t hours           = this->candidates[0].getHours();

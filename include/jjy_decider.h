@@ -19,6 +19,7 @@ class JJYDecider {
   void setTimeCode(JJYDecoder *decoder, uint8_t seconds, uint8_t timecode);
 
   String dump(uint8_t seconds);
+  JJYDateTime *getDecidedDateTime();
 
  private:
   JJYDateTime candidates[JJY_DECIDER_CANDIDATES_COUNT + 1];
