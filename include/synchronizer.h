@@ -19,6 +19,8 @@ class __synchronizer {
  public:
   static void begin(uint8_t pin, void (*callback)(void));
 
+  static bool isSynchronized();
+
  private:
   static uint8_t pin;
   static void (*callback)(void);

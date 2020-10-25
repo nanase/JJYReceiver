@@ -24,6 +24,10 @@ void __synchronizer::begin(uint8_t pin, void (*callback)(void)) {
   Timer1.stop();
 }
 
+bool __synchronizer::isSynchronized() {
+  return __synchronizer::synchronized;
+}
+
 // -----------------------
 
 void __synchronizer::interrupt_callback() {
