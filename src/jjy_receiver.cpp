@@ -111,7 +111,7 @@ JJYDecider *JJYReceiver::getJJYDecider() {
 }
 
 uint8_t JJYReceiver::getSeconds() {
-  return (this->seconds + 1) % 60;
+  return this->seconds % 60;
 }
 
 bool JJYReceiver::markerDetected() {
